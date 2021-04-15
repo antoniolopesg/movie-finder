@@ -24,7 +24,8 @@
     "styled-components": "^5.2.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "git-commit-msg-linter": "^3.1.0"
   },
   "private": true
 }
