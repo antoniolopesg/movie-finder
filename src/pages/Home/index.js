@@ -72,7 +72,7 @@ const Home = () => {
         </SearchMovie>
         <MoviesList 
           data={movies}
-          keyExtractor={item => item.id}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <MovieCard movieData={item}/>
           )}
