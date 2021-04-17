@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import mapGetMovies from '../../util/mapQueries'
 import { getMovies } from '../../graphql/services'
 
@@ -13,70 +13,70 @@ import {
   MoviesList
 } from './styles'
 
+const moviesPerRequest = 10
+
 const Home = () => {
-  const moviesListRef = useRef(null)
-  const moviesPerRequest = 10
+  const first = useRef(moviesPerRequest)
+  const last = useRef(moviesPerRequest)
 
   const [wantedMovie, setWantedMovie] = useState('')
-
-  const [first, setFirst] = useState(moviesPerRequest)
-  const [last, setLast] = useState(moviesPerRequest)
   const [totalPage, setTotalPage] = useState(0)
   const [searching, setSearching] = useState(false)
-
   const [movies, setMovies] = useState([])
 
-  const handleInput = useCallback(value => {
-    setWantedMovie(value)
-  }, [])
+  const moviesListRef = useRef(null)
 
-  const handleNextPage = useCallback(() => {
-    const moreToFetch = first + moviesPerRequest < totalPage
-    const hasSmallestParts = totalPage - first < moviesPerRequest
+  const handleInput = value => setWantedMovie(value)
 
-    if (moreToFetch || hasSmallestParts) {
-      if(hasSmallestParts){
-        setFirst(totalPage)
-        setLast(totalPage - first)
-      }
-      loadMovies()
-    }
-
-    if(hasSmallestParts){
-      setFirst(totalPage)
-      setLast(totalPage - first)
-      loadMovies()
-    }
-  }, [first, last, totalPage, loadMovies])
-
-  const loadMovies = useCallback(async () => {
+  const loadMovies = async () => {
     try {
       setSearching(true)
-      const response = await getMovies(wantedMovie, first, last)
+      const response = await getMovies(wantedMovie, first.current, last.current)
 
       const mappedMovies = mapGetMovies(response)
 
-      setMovies(arrayMovies => [...arrayMovies, ...mappedMovies.movies ]);
+      setMovies(arrayMovies => [...arrayMovies, ...mappedMovies.movies ])
 
       setTotalPage(mappedMovies.totalCount)
 
-      setFirst(first + moviesPerRequest)
+      first.current = first.current + moviesPerRequest
+
       setSearching(false)
     } catch (err) {
       console.log(JSON.stringify(err))
     }
-  }, [first, wantedMovie, movies, last])
+  }
 
-  const handleFirstPage = useCallback(async () => {
+  const handleFirstPage = async () => {
     if (movies.length) {
       moviesListRef.current.scrollToIndex({index: 1})
     }
-    setMovies([]);
-    setFirst(moviesPerRequest);
-    setLast(moviesPerRequest);
 
-    loadMovies();
-  }, [loadMovies, movies.length, first, last])
+    first.current = moviesPerRequest
+    last.current = moviesPerRequest
+  
+    setMovies([])
+
+    await loadMovies()
+  }
+
+  const handleNextPage = async () => {
+    const moreToFetch = first.current + moviesPerRequest < totalPage
+    const hasSmallestParts = totalPage - first.current < moviesPerRequest
+    
+    if (moreToFetch || hasSmallestParts) {
+      if(hasSmallestParts){
+        const backupFirst = first.current
+        first.current += totalPage
+        last.current = totalPage - backupFirst
+
+        console.log(first.current, last.current)
+      }
+    
+      await loadMovies()
+    }
+  }
+
 
   return (
     <Container>
@@ -99,6 +99,7 @@ const Home = () => {
           ref={moviesListRef}
           data={movies}
           onEndReached={handleNextPage}
+          onEndReachedThreshold={0.1}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <MovieCard movieData={item}/>
