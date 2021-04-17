@@ -1,5 +1,7 @@
 import React from 'react'
 
+import noImage from '../../assets/no-photo-available-w154.png'
+
 import {
   Container,
   Poster,
@@ -9,13 +11,13 @@ import {
   Overview
 } from './styles';
 
-const MovieCard = ({ movieData }) => {
+const MovieCard = ({ movieData, onPress }) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Poster
-        source={{
-          uri: movieData.poster,
-        }}
+        source={movieData.poster ? {
+          uri: movieData.poster
+        }: noImage}
         resizeMode="contain"
       />
       <MovieInfo>

@@ -15,7 +15,7 @@ import {
 
 const moviesPerRequest = 10
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const first = useRef(moviesPerRequest)
   const last = useRef(moviesPerRequest)
 
@@ -102,7 +102,7 @@ const Home = () => {
           onEndReachedThreshold={0.1}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <MovieCard movieData={item}/>
+            <MovieCard onPress={() => { navigation.navigate('Movie', { id: item.id }) }} movieData={item}/>
           )}
         />
       </MoviesContainer>

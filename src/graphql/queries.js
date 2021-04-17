@@ -18,3 +18,18 @@ export const GET_MOVIES = gql`
     }
   }
 `;
+
+export const GET_MOVIE = gql`
+  query getMovie($id: Int) {
+    movies {
+      movie(id: $id) {
+        details {
+          title
+          rating
+          overview
+          poster(size: W500)
+        }
+      }
+    }
+  }
+`;
