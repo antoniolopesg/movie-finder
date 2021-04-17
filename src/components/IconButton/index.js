@@ -3,9 +3,9 @@ import { MaterialIcons } from '@expo/vector-icons'
 
 import { Container } from './styles'
 
-const IconButton = ({ icon, ...rest }) => {
+const IconButton = ({ icon, onPress, searching, ...rest }) => {
   return (
-    <Container>
+    <Container searching={searching} onPress={onPress}>
       <MaterialIcons name={icon} {...rest}/>
     </Container>
   )
