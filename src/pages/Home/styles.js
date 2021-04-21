@@ -1,6 +1,8 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+export const Container = styled(SafeAreaView)`
   background-color: #260c1a;
   flex: 1;
   padding: 16px;
