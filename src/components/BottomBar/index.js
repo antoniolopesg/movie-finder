@@ -9,11 +9,11 @@ const BottomBar = () => {
   return (
     <Container>
       <RouteButton>
-        <Icon name="home" size={32} color="#666"/>
+        <Icon name="home" size={32} color="#260c1a"/>
         <RouteText>Home</RouteText>
       </RouteButton>
       <RouteButton>
-        <Icon name="heart" size={32} color="#666"/>
+        <Icon name="heart" size={32} color="#260c1a"/>
         <RouteText>Favorite</RouteText>
       </RouteButton>
     </Container>

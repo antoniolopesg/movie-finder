@@ -10,7 +10,7 @@ export const Container = styled.View`
 `
 export const RouteButton = styled(RectButton)`
   flex: 1;
-  background-color: #ddd;
+  background-color: #fff;
 
   justify-content: center;
   align-items: center;
@@ -18,5 +18,5 @@ export const RouteButton = styled(RectButton)`
 
 export const RouteText = styled.Text`
   font-weight: 700;
-  color: #666;
+  color: #260c1a;
 `
