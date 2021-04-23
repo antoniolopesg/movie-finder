@@ -34,3 +34,16 @@ export const SearchInput = styled.TextInput`
 export const MoviesList = styled.FlatList`
   flex: 1;
 `
+export const EmptyMoviesContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const EmptyText = styled.Text`
+  color: #aaa;
+  font-size: 35px;
+  font-weight: 700;
+  max-width: 200px;
+  text-align: center;
+`

@@ -10,7 +10,9 @@ import {
   MoviesContainer,
   SearchMovie,
   SearchInput,
-  MoviesList
+  MoviesList,
+  EmptyMoviesContainer,
+  EmptyText
 } from './styles'
 
 const moviesPerRequest = 10
@@ -41,10 +43,11 @@ const Home = ({ navigation }) => {
 
       first.current = first.current + moviesPerRequest
 
-      setSearching(false)
     } catch (err) {
       console.log(JSON.stringify(err))
     }
+
+    setSearching(false)
   }
 
   const handleFirstPage = async () => {
@@ -95,16 +98,22 @@ const Home = ({ navigation }) => {
             onPress={handleFirstPage}
           />
         </SearchMovie>
-        <MoviesList 
-          ref={moviesListRef}
-          data={movies}
-          onEndReached={handleNextPage}
-          onEndReachedThreshold={0.1}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <MovieCard onPress={() => { navigation.navigate('Movie', { id: item.id }) }} movieData={item}/>
-          )}
-        />
+        {movies.length ? (
+          <MoviesList 
+            ref={moviesListRef}
+            data={movies}
+            onEndReached={handleNextPage}
+            onEndReachedThreshold={0.1}
+            keyExtractor={item => String(item.id)}
+            renderItem={({ item }) => (
+              <MovieCard onPress={() => { navigation.navigate('Movie', { id: item.id }) }} movieData={item}/>
+            )}
+          />
+        ) : (
+          <EmptyMoviesContainer>
+            <EmptyText>No movie loaded</EmptyText>
+          </EmptyMoviesContainer>
+        )}
       </MoviesContainer>
     </Container>
   )
