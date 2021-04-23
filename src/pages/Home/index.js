@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+
 import mapGetMovies from '../../util/mapQueries'
 import { getMovies } from '../../graphql/services'
 
@@ -17,7 +19,9 @@ import {
 
 const moviesPerRequest = 10
 
-const Home = ({ navigation }) => {
+const Home = () => {
+  const { navigate } = useNavigation()
+
   const first = useRef(moviesPerRequest)
   const last = useRef(moviesPerRequest)
 
@@ -106,7 +110,7 @@ const Home = ({ navigation }) => {
             onEndReachedThreshold={0.1}
             keyExtractor={item => String(item.id)}
             renderItem={({ item }) => (
-              <MovieCard onPress={() => { navigation.navigate('Movie', { id: item.id }) }} movieData={item}/>
+              <MovieCard onPress={() => { navigate('Movie', { id: item.id }) }} movieData={item}/>
             )}
           />
         ) : (
