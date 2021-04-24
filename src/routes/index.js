@@ -5,13 +5,13 @@ import Home from '../pages/Home'
 import Movie from '../pages/Movie'
 
 import TabRoute from './tabs'
+import Favorites from '../pages/Favorites'
 
 const { Navigator, Screen } = createStackNavigator()
 
 const StackRoutes = () => (
   <Navigator screenOptions={{ headerShown: false }}>
     <Screen name="MainTab" component={TabRoute}/>
-    <Screen name="Home" component={Home}/>
     <Screen name="Movie" component={Movie}/>
   </Navigator>
 )
