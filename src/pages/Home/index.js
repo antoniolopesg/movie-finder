@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { Alert } from 'react-native'
 
 import mapGetMovies from '../../util/mapQueries'
 import { getMovies } from '../../graphql/services'
@@ -46,9 +47,9 @@ const Home = () => {
       setTotalPage(mappedMovies.totalCount)
 
       first.current = first.current + moviesPerRequest
-
     } catch (err) {
-      console.log(JSON.stringify(err))
+      Alert
+        .alert('Some problem occurred', 'Some problem happened while fetching movies, check your connection, if the problem persists we apologize.')
     }
 
     setSearching(false)
@@ -76,8 +77,6 @@ const Home = () => {
         const backupFirst = first.current
         first.current += totalPage
         last.current = totalPage - backupFirst
-
-        console.log(first.current, last.current)
       }
     
       await loadMovies()

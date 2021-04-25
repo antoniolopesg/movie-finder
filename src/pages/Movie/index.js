@@ -1,11 +1,9 @@
 import React, {useEffect, useState, useCallback} from 'react'
-
-import {ScrollView, View} from 'react-native'
-
+import { useNavigation } from '@react-navigation/native'
+import {Alert, ScrollView, View} from 'react-native'
 import { MaterialIcons as Icon } from '@expo/vector-icons'
 
 import {getMovie} from '../../graphql/services'
-
 import noImage from '../../assets/no-photo-available-w500.png'
 
 import {
@@ -20,10 +18,12 @@ import {
   RatingContainer,
   Rating,
 } from './styles'
+import { useFavorites } from '../../hooks/favorites'
 
 const Movie = ({route, navigation}) => {
-  const {id} = route.params
-
+  const { goBack } = useNavigation()
+  const { toggleFavorite, isFavorite } = useFavorites()
+  const { id } = route.params
   const [movie, setMovie] = useState({})
 
   useEffect(() => {
@@ -35,13 +35,11 @@ const Movie = ({route, navigation}) => {
       const response = await getMovie(id)
       setMovie(response.movies.movie.details)
     } catch (err) {
-      console.log(err)
+      Alert
+        .alert('Some problem occurred', 'Check your connection, if the problem persists we apologize')
+      goBack()
     }
   }, [id])
-
-  const goBack = useCallback(() => {
-    navigation.goBack()
-  }, [navigation])
 
   return (
     <Container>
@@ -50,8 +48,8 @@ const Movie = ({route, navigation}) => {
           <Icon name="arrow-back" size={32} color="#260c1a" />
         </GoBack>
 
-        <AddToFav>
-          <Icon name="favorite-border" size={32} color="#260c1a" />
+        <AddToFav onPress={() => toggleFavorite({ id,...movie })}>
+          <Icon name={isFavorite(id) ? "favorite" : "favorite-border"} size={32} color="#260c1a" />
         </AddToFav>
       </TopBar>
       <ScrollView>

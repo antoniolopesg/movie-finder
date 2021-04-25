@@ -14,3 +14,7 @@ export const FavoritesContainer = styled.View`
   border-radius: 8px;
   padding: 8px;
 `
+
+export const FavoritesList = styled.FlatList`
+  flex: 1;
+`

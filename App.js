@@ -4,10 +4,14 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import StackRoutes from './src/routes'
 
+import { FavoritesProvider } from './src/hooks/favorites'
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <StackRoutes/>
-    </NavigationContainer>
+    <FavoritesProvider>
+      <NavigationContainer>
+        <StackRoutes/>
+      </NavigationContainer>
+    </FavoritesProvider>
   );
 }
