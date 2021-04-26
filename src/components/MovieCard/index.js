@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
 import noImage from '../../assets/no-photo-available-w154.png';
