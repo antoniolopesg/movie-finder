@@ -95,7 +95,7 @@ const Home = () => {
         <SearchMovie>
           <SearchInput
             value={wantedMovie}
-            placeholder="Which movie do you want to look for?"
+            placeholder="Enter a movie name..."
             onChangeText={handleInput}
           />
           <IconButton
