@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import noImage from '../../assets/no-photo-available-w154.png';
 
@@ -24,6 +25,16 @@ const MovieCard = ({movieData, onPress}) => {
       </MovieInfo>
     </Container>
   );
+};
+
+MovieCard.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  movieData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    overview: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default MovieCard;
