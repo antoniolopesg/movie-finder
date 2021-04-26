@@ -2,6 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {Alert, ScrollView, View} from 'react-native'
 import { MaterialIcons as Icon } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import {getMovie} from '../../graphql/services'
 import noImage from '../../assets/no-photo-available-w500.png'
@@ -20,13 +21,20 @@ import {
 } from './styles'
 import { useFavorites } from '../../hooks/favorites'
 
-const Movie = ({route, navigation}) => {
+const Movie = ({route}) => {
   const { goBack } = useNavigation()
-  const { toggleFavorite, isFavorite } = useFavorites()
+  const { toggleFavorite, isFavorite, findFavorite } = useFavorites()
   const { id } = route.params
   const [movie, setMovie] = useState({})
 
   useEffect(() => {
+    const favoriteMovie = findFavorite(id)
+
+    if(favoriteMovie){
+      setMovie(favoriteMovie)
+      return
+    }
+
     loadMovie()
   }, [loadMovie])
 

@@ -1,5 +1,8 @@
 import React, { useContext, useState, createContext, useCallback } from 'react'
+import { Alert } from 'react-native'
 import * as FileSystem from 'expo-file-system'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useEffect } from 'react'
 
 const FavoritesContext = createContext({})
 
@@ -24,18 +27,38 @@ export const FavoritesProvider = ({ children }) => {
 
         const imgBase64 = await FileSystem.readAsStringAsync(response.uri, { encoding: FileSystem.EncodingType.Base64 })
         movieToFav.poster = `data:image/png;base64,${imgBase64}`
+
       } catch(err){
-        console.log(err)
+        Alert.alert('Some problem occurred', 'Sorry, some problem happened when adding the movie to favorites')
+        return;
       }
     }
-
+    
     setFavorites(state => [...state, movieToFav])
   },[favorites])
 
+  useEffect(() => {
+    async function loadStoragedFavorites() {
+      const storagedFavorites = await AsyncStorage.getItem('@MovieFinder:favorites')
+      
+      if(storagedFavorites) setFavorites(JSON.parse(storagedFavorites))
+    }
+    loadStoragedFavorites()
+  }, [])
+
+  useEffect(() => {
+    async function saveFavorites() {
+      await AsyncStorage.setItem('@MovieFinder:favorites', JSON.stringify(favorites))
+    }
+    saveFavorites()
+  }, [favorites])
+
   const isFavorite = (id) => favorites.findIndex(item => item.id === id) >= 0
 
+  const findFavorite = (id) => favorites.find(item => item.id === id)
+
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, findFavorite }}>
       {children}
     </FavoritesContext.Provider>
   )
