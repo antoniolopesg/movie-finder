@@ -33,7 +33,7 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     overview: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
+    poster: PropTypes.string,
   }).isRequired,
 };
 
