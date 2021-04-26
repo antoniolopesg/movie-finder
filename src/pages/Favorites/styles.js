@@ -18,3 +18,18 @@ export const FavoritesContainer = styled.View`
 export const FavoritesList = styled.FlatList`
   flex: 1;
 `
+
+export const EmptyFavoritesContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const EmptyText = styled.Text`
+  color: #aaa;
+  width: 100%;
+  font-size: 35px;
+  font-weight: 700;
+  max-width: 400px;
+  text-align: center;
+`

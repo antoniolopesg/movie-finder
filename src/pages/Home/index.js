@@ -114,7 +114,7 @@ const Home = () => {
           />
         ) : (
           <EmptyMoviesContainer>
-            <EmptyText>No movie loaded</EmptyText>
+            <EmptyText>Try searching for some film</EmptyText>
           </EmptyMoviesContainer>
         )}
       </MoviesContainer>

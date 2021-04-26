@@ -44,6 +44,6 @@ export const EmptyText = styled.Text`
   color: #aaa;
   font-size: 35px;
   font-weight: 700;
-  max-width: 200px;
+  max-width: 400px;
   text-align: center;
 `
