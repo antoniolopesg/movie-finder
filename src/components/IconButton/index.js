@@ -12,10 +12,13 @@ const IconButton = ({icon, onPress, searching, ...rest}) => {
   );
 };
 
+<<<<<<< HEAD
 IconButton.propTypes = {
   icon: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   searching: PropTypes.bool.isRequired,
 };
 
+=======
+>>>>>>> fded401163905d2d680c54f8b9189029f90b0fa7
 export default IconButton;
