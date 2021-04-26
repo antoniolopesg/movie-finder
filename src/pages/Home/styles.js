@@ -1,12 +1,12 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-import { SafeAreaView } from 'react-native-safe-area-context'
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const Container = styled(SafeAreaView)`
   background-color: #260c1a;
   flex: 1;
   padding: 16px;
-`
+`;
 
 export const MoviesContainer = styled.View`
   background-color: #fff;
@@ -33,12 +33,12 @@ export const SearchInput = styled.TextInput`
 
 export const MoviesList = styled.FlatList`
   flex: 1;
-`
+`;
 export const EmptyMoviesContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const EmptyText = styled.Text`
   color: #aaa;
@@ -46,4 +46,4 @@ export const EmptyText = styled.Text`
   font-weight: 700;
   max-width: 400px;
   text-align: center;
-`
+`;

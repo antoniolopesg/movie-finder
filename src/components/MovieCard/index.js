@@ -1,23 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import noImage from '../../assets/no-photo-available-w154.png'
+import noImage from '../../assets/no-photo-available-w154.png';
 
-import {
-  Container,
-  Poster,
-  MovieInfo,
-  Title,
-  Rating,
-  Overview
-} from './styles';
+import {Container, Poster, MovieInfo, Title, Rating, Overview} from './styles';
 
-const MovieCard = ({ movieData, onPress }) => {
+const MovieCard = ({movieData, onPress}) => {
   return (
     <Container onPress={onPress}>
       <Poster
-        source={movieData.poster ? {
-          uri: movieData.poster
-        }: noImage}
+        source={
+          movieData.poster
+            ? {
+                uri: movieData.poster,
+              }
+            : noImage
+        }
         resizeMode="contain"
       />
       <MovieInfo>
@@ -26,7 +23,7 @@ const MovieCard = ({ movieData, onPress }) => {
         <Overview numberOfLines={4}>{movieData.overview}</Overview>
       </MovieInfo>
     </Container>
-  )
-}
+  );
+};
 
-export default MovieCard
+export default MovieCard;

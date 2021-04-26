@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled(RectButton)`
   height: 150px;
   width: 100%;
   flex-direction: row;
-`
+`;
 
 export const Poster = styled.Image`
   width: 92px;

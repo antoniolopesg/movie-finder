@@ -1,11 +1,10 @@
-import React, {useEffect, useState, useCallback} from 'react'
-import { useNavigation } from '@react-navigation/native'
-import {Alert, ScrollView, View} from 'react-native'
-import { MaterialIcons as Icon } from '@expo/vector-icons'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, {useEffect, useState, useCallback} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Alert, ScrollView, View} from 'react-native';
+import {MaterialIcons as Icon} from '@expo/vector-icons';
 
-import {getMovie} from '../../graphql/services'
-import noImage from '../../assets/no-photo-available-w500.png'
+import {getMovie} from '../../graphql/services';
+import noImage from '../../assets/no-photo-available-w500.png';
 
 import {
   Container,
@@ -18,36 +17,38 @@ import {
   Overview,
   RatingContainer,
   Rating,
-} from './styles'
-import { useFavorites } from '../../hooks/favorites'
+} from './styles';
+import {useFavorites} from '../../hooks/favorites';
 
 const Movie = ({route}) => {
-  const { goBack } = useNavigation()
-  const { toggleFavorite, isFavorite, findFavorite } = useFavorites()
-  const { id } = route.params
-  const [movie, setMovie] = useState({})
+  const {goBack} = useNavigation();
+  const {toggleFavorite, isFavorite, findFavorite} = useFavorites();
+  const {id} = route.params;
+  const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    const favoriteMovie = findFavorite(id)
+    const favoriteMovie = findFavorite(id);
 
-    if(favoriteMovie){
-      setMovie(favoriteMovie)
-      return
+    if (favoriteMovie) {
+      setMovie(favoriteMovie);
+      return;
     }
 
-    loadMovie()
-  }, [loadMovie])
+    loadMovie();
+  }, [loadMovie, findFavorite, id]);
 
   const loadMovie = useCallback(async () => {
     try {
-      const response = await getMovie(id)
-      setMovie(response.movies.movie.details)
+      const response = await getMovie(id);
+      setMovie(response.movies.movie.details);
     } catch (err) {
-      Alert
-        .alert('Some problem occurred', 'Check your connection, if the problem persists we apologize')
-      goBack()
+      Alert.alert(
+        'Some problem occurred',
+        'Check your connection, if the problem persists we apologize'
+      );
+      goBack();
     }
-  }, [id])
+  }, [id, goBack]);
 
   return (
     <Container>
@@ -56,17 +57,25 @@ const Movie = ({route}) => {
           <Icon name="arrow-back" size={32} color="#260c1a" />
         </GoBack>
 
-        <AddToFav onPress={() => toggleFavorite({ id,...movie })}>
-          <Icon name={isFavorite(id) ? "favorite" : "favorite-border"} size={32} color="#260c1a" />
+        <AddToFav onPress={() => toggleFavorite({id, ...movie})}>
+          <Icon
+            name={isFavorite(id) ? 'favorite' : 'favorite-border'}
+            size={32}
+            color="#260c1a"
+          />
         </AddToFav>
       </TopBar>
       <ScrollView>
         <View>
           <MovieContainer>
             <Poster
-              source={movie.poster ? {
-                uri: movie.poster,
-              }:noImage}
+              source={
+                movie.poster
+                  ? {
+                      uri: movie.poster,
+                    }
+                  : noImage
+              }
               resizeMode="contain"
             />
 
@@ -82,7 +91,7 @@ const Movie = ({route}) => {
         </View>
       </ScrollView>
     </Container>
-  )
-}
+  );
+};
 
-export default Movie
+export default Movie;
