@@ -22,7 +22,7 @@ const MovieCard = ({ movieData, onPress }) => {
       />
       <MovieInfo>
         <Title numberOfLines={1}>{movieData.title}</Title>
-        <Rating>{movieData.rating}</Rating>
+        <Rating>{movieData.rating.toFixed(1)}</Rating>
         <Overview numberOfLines={4}>{movieData.overview}</Overview>
       </MovieInfo>
     </Container>
