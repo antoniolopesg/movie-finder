@@ -5,10 +5,12 @@ export const Container = styled(RectButton)`
   height: 150px;
   width: 100%;
   flex-direction: row;
+  margin-top: 16px;
 `;
 
 export const Poster = styled.Image`
-  width: 92px;
+  width: 100%;
+  max-width: 92px;
   height: 100%;
 `;
 export const MovieInfo = styled.View`

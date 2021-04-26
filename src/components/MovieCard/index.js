@@ -15,7 +15,7 @@ const MovieCard = ({movieData, onPress}) => {
               }
             : noImage
         }
-        resizeMode="contain"
+        resizeMode="cover"
       />
       <MovieInfo>
         <Title numberOfLines={1}>{movieData.title}</Title>
