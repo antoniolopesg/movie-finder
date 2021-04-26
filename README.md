@@ -11,11 +11,11 @@ Movie finder is an application made for movie fans that gives you access to a da
 ## Screenshots
 
 <div align="center">
-  <img style="max-width: 200px" src="./docs/assets/home.png"/>
-  <img style="max-width: 200px" src="./docs/assets/favorites.png"/>
-  <img style="max-width: 200px" src="./docs/assets/listavengers.png"/>
-  <img style="max-width: 200px" src="./docs/assets/endgame.png"/>
-  <img style="max-width: 200px" src="./docs/assets/endgamefavorites.png"/>
+  <img width="200px" src="./docs/assets/home.png"/>
+  <img width="200px" src="./docs/assets/favorites.png"/>
+  <img width="200px" src="./docs/assets/listavengers.png"/>
+  <img width="200px" src="./docs/assets/endgame.png"/>
+  <img width="200px" src="./docs/assets/endgamefavorites.png"/>
 </div>
 
 ## Technologies used
