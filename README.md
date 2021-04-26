@@ -29,6 +29,5 @@ Movie finder is an application made for movie fans that gives you access to a da
 - [EditorConfig](https://editorconfig.org/)
 
 ## Contributors
-<a href="https://github.com/antoniolopesg">
-  <img width="100px" style="border-radius: 50%;" src="./docs/assets/antoniolopesg.jpg" alt="Antonio Lopes"/>
-</a>
+
+- <a href="https://github.com/antoniolopesg"><strong>Antonio Lopes</strong></a>
