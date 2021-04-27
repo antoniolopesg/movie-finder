@@ -18,6 +18,28 @@ Movie finder is an application made for movie fans that gives you access to a da
   <img width="200px" src="./docs/assets/endgamefavorites.png"/>
 </div>
 
+## How to run
+
+```shell
+# We use yarn in the tutorial but you can use npm!
+
+# Make sure you have expo-cli installed globally
+
+$ npm install -g expo-cli
+
+# Clone repository
+
+$ git clone https://github.com/antoniolopesg/movie-finder
+
+# Install dependencies
+
+$ yarn
+
+# Start app
+
+$ yarn start
+```
+
 ## Technologies used
 - [Expo](https://expo.io/)
 - [GraphQL Request](https://github.com/prisma-labs/graphql-request)
