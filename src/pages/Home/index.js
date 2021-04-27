@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Alert} from 'react-native';
 
@@ -35,7 +35,7 @@ const Home = () => {
 
   const handleInput = value => setWantedMovie(value);
 
-  const loadMovies = async () => {
+  const loadMovies = useCallback(async () => {
     try {
       setSearching(true);
       const response = await getMovies(
@@ -59,7 +59,7 @@ const Home = () => {
     }
 
     setSearching(false);
-  };
+  }, [wantedMovie]);
 
   const handleFirstPage = async () => {
     if (movies.length) {
