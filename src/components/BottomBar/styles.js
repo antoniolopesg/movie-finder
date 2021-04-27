@@ -1,12 +1,12 @@
 import {RectButton} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+import {getBottomSpace} from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
-  height: 70px;
-
   width: 100%;
-
   flex-direction: row;
+  background-color: #fff;
+  padding-bottom: ${getBottomSpace()}px;
 `;
 export const RouteButton = styled(RectButton)`
   flex: 1;
@@ -14,6 +14,8 @@ export const RouteButton = styled(RectButton)`
 
   justify-content: center;
   align-items: center;
+
+  padding: 10px;
 `;
 
 export const RouteText = styled.Text`
