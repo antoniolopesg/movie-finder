@@ -96,7 +96,9 @@ const Home = () => {
           <SearchInput
             value={wantedMovie}
             placeholder="Enter a movie name..."
+            returnKeyType="search"
             onChangeText={handleInput}
+            onSubmitEditing={handleFirstPage}
           />
           <IconButton
             icon="search"
