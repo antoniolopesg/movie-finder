@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "movie-finder",
+    "name": "Movie Finder",
     "slug": "movie-finder",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Movie finder is an application made for movie fans that gives you access to a database of movies to discover new ones and save your favorites. ",
+    "githubUrl": "https://github.com/antoniolopesg/movie-finder"
   }
 }

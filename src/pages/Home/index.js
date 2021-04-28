@@ -105,7 +105,7 @@ const Home = () => {
             color="#fff"
             size={32}
             searching={searching}
-            onPress={handleFirstPage}
+            onPress={searching ? () => {} : handleFirstPage}
           />
         </SearchMovie>
         {movies.length ? (
