@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Alert} from 'react-native';
 
@@ -19,27 +19,29 @@ import {
 } from './styles';
 
 const moviesPerRequest = 10;
+const currentMovie = '';
 
 const Home = () => {
   const {navigate} = useNavigation();
 
   const first = useRef(moviesPerRequest);
   const last = useRef(moviesPerRequest);
+  const currentSearch = useRef(currentMovie);
 
-  const [wantedMovie, setWantedMovie] = useState('');
+  const [movieInput, setMovieInput] = useState('');
   const [totalPage, setTotalPage] = useState(0);
   const [searching, setSearching] = useState(false);
   const [movies, setMovies] = useState([]);
 
   const moviesListRef = useRef(null);
 
-  const handleInput = value => setWantedMovie(value);
+  const handleInput = value => setMovieInput(value);
 
-  const loadMovies = useCallback(async () => {
+  const loadMovies = async () => {
     try {
       setSearching(true);
       const response = await getMovies(
-        wantedMovie,
+        currentSearch.current,
         first.current,
         last.current
       );
@@ -59,13 +61,18 @@ const Home = () => {
     }
 
     setSearching(false);
-  }, [wantedMovie]);
+  };
 
   const handleFirstPage = async () => {
+    if (!movieInput) {
+      return;
+    }
+
     if (movies.length) {
       moviesListRef.current.scrollToIndex({index: 1});
     }
 
+    currentSearch.current = movieInput;
     first.current = moviesPerRequest;
     last.current = moviesPerRequest;
 
@@ -94,7 +101,7 @@ const Home = () => {
       <MoviesContainer>
         <SearchMovie>
           <SearchInput
-            value={wantedMovie}
+            value={movieInput}
             placeholder="Enter a movie name..."
             returnKeyType="search"
             onChangeText={handleInput}
